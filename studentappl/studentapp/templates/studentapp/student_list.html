@@ -1,0 +1,41 @@
+{% extends 'studentapp\base.html' %}
+
+{% block title %}Student List{% endblock %}
+
+{% block content %}
+    <h1>Student List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Grade</th>
+                <th>Address</th>
+                <th>Courses</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in student_list %}
+                <tr>
+                    <td>{{ student.id }}</td>
+                    <td><a href="{% url 'student_detail' student.pk %}">{{ student.name }}</a></td>
+                    <td>{{ student.age }}</td>
+                    <td>{{ student.grade }}</td>
+                    <td>{{ student.address }}</td>
+                    <td>
+                        {% for course in student.course.all %}
+                            {{ course.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{% url 'student_edit' student.pk %}">Edit</a>
+                        <a href="{% url 'student_delete' student.pk %}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'student_add' %}">Add Student</a>
+{% endblock %}

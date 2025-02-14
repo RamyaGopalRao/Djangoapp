@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Grade</th>
+                <th>Address</th>
+                <th>Courses</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in object_list %}
+                <tr>
+                    <td>{{ student.id }}</td>
+                    <td><a href="{% url 'student_detail' student.pk %}">{{ student.name }}</a></td>
+                    <td>{{ student.age }}</td>
+                    <td>{{ student.grade }}</td>
+                    <td>{{ student.address }}</td>
+                    <td>
+                        {% for course in student.courses.all %}
+                            {{ course.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{% url 'student_edit' student.pk %}">Edit</a>
+                        <a href="{% url 'student_delete' student.pk %}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'student_add' %}">Add Student</a>
+</body>
+</html>

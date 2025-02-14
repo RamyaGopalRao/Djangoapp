@@ -1,0 +1,12 @@
+{% extends 'studentapp\base.html' %}
+
+{% block title %}Student Detail{% endblock %}
+
+{% block content %}
+
+    <h1>{{ object.name }}</h1>
+    <p>Age: {{ object.age }}</p>
+    <p>Grade: {{ object.grade }}</p>
+    <p>Address: {{ object.address }}</p>
+    <p>Course: {{ object.course }}</p>
+{% endblock %}

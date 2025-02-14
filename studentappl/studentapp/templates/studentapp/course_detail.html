@@ -1,0 +1,11 @@
+{% extends 'studentapp\base.html' %}
+
+{% block title %}Course Detail{% endblock %}
+
+{% block content %}
+    <h1>{{ object.name }}</h1>
+    <p>ID: {{ object.id }}</p>
+    <a href="{% url 'course_edit' object.pk %}">Edit</a>
+    <a href="{% url 'course_delete' object.pk %}">Delete</a>
+    <a href="{% url 'course_list' %}">Back to List</a>
+{% endblock %}

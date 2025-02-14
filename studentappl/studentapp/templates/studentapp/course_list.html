@@ -1,0 +1,29 @@
+{% extends 'studentapp\base.html' %}
+
+{% block title %}Course Detail{% endblock %}
+
+{% block content %}
+    <h1>Course List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in object_list %}
+                <tr>
+                    <td>{{ course.id }}</td>
+                    <td><a href="{% url 'course_detail' course.pk %}">{{ course.name }}</a></td>
+                    <td>
+                        <a href="{% url 'course_edit' course.pk %}">Edit</a>
+                        <a href="{% url 'course_delete' course.pk %}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'course_add' %}">Add Course</a>
+{% endblock %}
